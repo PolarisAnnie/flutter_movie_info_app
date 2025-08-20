@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   // 폰트 사이즈
-  static const double headerFontSize = 24.0;
+  static const double headerFontSize = 80.0;
   static const double titleFontSize = 16.0;
   static const double bodyFontSize = 12.0;
 
   // 폰트 굵기
-  static const FontWeight headerFontWeight = FontWeight.w900;
+  static const FontWeight headerFontWeight = FontWeight.w800;
   static const FontWeight titleFontWeight = FontWeight.w600;
   static const FontWeight bodyFontWeight = FontWeight.w400;
 
