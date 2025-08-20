@@ -7,6 +7,9 @@ import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/product
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
 class DetailPage extends StatelessWidget {
+  const DetailPage({super.key, required this.heroTag});
+
+  final String heroTag;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +20,14 @@ class DetailPage extends StatelessWidget {
             SizedBox(
               height: 500,
               width: double.infinity,
-              child: ClipRRect(
-                //TODO: TMDB API에서 이미지 정보 넣기
-                child: Image.network(
-                  'https://picsum.photos/500/700',
-                  fit: BoxFit.cover,
+              child: Hero(
+                tag: heroTag,
+                child: ClipRRect(
+                  //TODO: TMDB API에서 이미지 정보 넣기
+                  child: Image.network(
+                    'https://picsum.photos/500/700',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

@@ -35,21 +35,27 @@ class MovieList extends StatelessWidget {
                         //TODO: 영화 정보 가지고 넘기기
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DetailPage()),
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DetailPage(heroTag: 'movie-$label-$index'),
+                          ),
                         );
                       },
                       child: orderByPopular
                           ? Stack(
                               clipBehavior: Clip.none, // 영역 밖으로 나가도 보이게
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  //TODO: TMDB API에서 이미지 정보 넣기
-                                  child: Image.network(
-                                    'https://picsum.photos/500/700', // 고정 크기
-                                    width: 120,
-                                    height: 180,
-                                    fit: BoxFit.cover,
+                                Hero(
+                                  tag: 'movie-$label-$index',
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    //TODO: TMDB API에서 이미지 정보 넣기
+                                    child: Image.network(
+                                      'https://picsum.photos/500/700', // 고정 크기
+                                      width: 120,
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 Positioned(
@@ -62,12 +68,15 @@ class MovieList extends StatelessWidget {
                                 ),
                               ],
                             )
-                          : ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              //TODO: TMDB API에서 이미지 정보 넣기
-                              child: Image.network(
-                                'https://picsum.photos/500/700',
-                                fit: BoxFit.cover,
+                          : Hero(
+                              tag: 'movie-$label-$index',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                //TODO: TMDB API에서 이미지 정보 넣기
+                                child: Image.network(
+                                  'https://picsum.photos/500/700',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                     ),
