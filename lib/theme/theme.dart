@@ -31,7 +31,7 @@ class AppTheme {
     useMaterial3: true,
     fontFamily: 'Paperlogy',
     colorScheme: const ColorScheme.dark(
-      primary: Colors.deepPurpleAccent,
+      primary: Colors.yellow,
       onPrimary: Colors.white,
       onSurface: Colors.white,
     ),

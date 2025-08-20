@@ -46,7 +46,7 @@ class MovieList extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   //TODO: TMDB API에서 이미지 정보 넣기
                                   child: Image.network(
-                                    'https://picsum.photos/120/180', // 고정 크기
+                                    'https://picsum.photos/500/700', // 고정 크기
                                     width: 120,
                                     height: 180,
                                     fit: BoxFit.cover,

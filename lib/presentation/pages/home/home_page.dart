@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
+                  //TODO: TMDB API에서 이미지 정보 넣기
                   child: Image.network(
                     'https://picsum.photos/500/700',
                     fit: BoxFit.cover,
