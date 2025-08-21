@@ -91,7 +91,14 @@ class _HomePageState extends ConsumerState<HomePage> {
               label: '인기순',
               orderByPopular: true,
               movies: state.popularMovies,
+              onLoadMore: () {
+                ref
+                    .read(homePageViewModelProvider.notifier)
+                    .loadMorePopularMovies();
+              },
+              isLoadingMore: state.isLoadingMorePopular,
             ),
+
             SizedBox(height: 18),
             MovieList(
               label: '평점 높은 순',
