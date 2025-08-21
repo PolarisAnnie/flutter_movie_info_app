@@ -2,7 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
 class BoxOfficeSection extends StatelessWidget {
-  const BoxOfficeSection({super.key});
+  final double voteAverage;
+  final int voteCount;
+  final double popularity;
+  final int budget;
+  final int revenue;
+
+  const BoxOfficeSection({
+    super.key,
+    required this.voteAverage,
+    required this.voteCount,
+    required this.popularity,
+    required this.budget,
+    required this.revenue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +29,37 @@ class BoxOfficeSection extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              InfoCard(value: '6.949', label: '평점'),
-              InfoCard(value: '331', label: '평점투표수'),
-              InfoCard(value: '5466.535', label: '인기점수'),
-              InfoCard(value: '\$150000000', label: '예산'),
-              InfoCard(value: '\$150000000', label: '수익'),
+              InfoCard(value: voteAverage.toStringAsFixed(1), label: '평점'),
+              InfoCard(value: _formatNumber(voteCount), label: '평점투표수'),
+              InfoCard(value: popularity.toStringAsFixed(1), label: '인기점수'),
+              InfoCard(value: _formatCurrency(budget), label: '예산'),
+              InfoCard(value: _formatCurrency(revenue), label: '수익'),
             ],
           ),
         ),
       ],
     );
+  }
+
+  String _formatNumber(int number) {
+    if (number >= 1000000) {
+      return '${(number / 1000000).toStringAsFixed(1)}M';
+    } else if (number >= 1000) {
+      return '${(number / 1000).toStringAsFixed(1)}K';
+    }
+    return number.toString();
+  }
+
+  String _formatCurrency(int amount) {
+    if (amount == 0) return '정보 없음';
+    if (amount >= 1000000000) {
+      return '\$${(amount / 1000000000).toStringAsFixed(1)}B';
+    } else if (amount >= 1000000) {
+      return '\$${(amount / 1000000).toStringAsFixed(1)}M';
+    } else if (amount >= 1000) {
+      return '\$${(amount / 1000).toStringAsFixed(1)}K';
+    }
+    return '\$$amount';
   }
 }
 

@@ -33,6 +33,7 @@ class ProductionImage extends StatelessWidget {
     return Container(
       width: 120,
       height: 80,
+      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.9),
         borderRadius: BorderRadius.circular(8),

@@ -28,6 +28,7 @@ class MovieRepositoryImpl implements MovieRepository {
       title: result.title,
       voteAverage: result.voteAverage,
       voteCount: result.voteCount,
+      posterPath: result.posterPath,
     );
   }
 

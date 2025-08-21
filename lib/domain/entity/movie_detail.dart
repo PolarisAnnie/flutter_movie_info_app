@@ -38,6 +38,8 @@ class MovieDetail {
   /// 영화에 대한 총 투표 수
   final int voteCount;
 
+  final String? posterPath;
+
   MovieDetail({
     required this.budget,
     required this.genres,
@@ -52,5 +54,6 @@ class MovieDetail {
     required this.title,
     required this.voteAverage,
     required this.voteCount,
+    this.posterPath,
   });
 }
