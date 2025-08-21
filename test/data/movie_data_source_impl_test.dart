@@ -18,7 +18,11 @@ void main() {
   // 각 테스트 전 Mock 객체 생성
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = MovieDataSourceImpl(httpClient: mockHttpClient);
+    // accessToken 매개변수에 더미 값 ('test_api_key') 전달
+    dataSource = MovieDataSourceImpl(
+      httpClient: mockHttpClient,
+      accessToken: 'test_api_key',
+    );
   });
 
   // 각 테스트 후 Mock 상태 초기화

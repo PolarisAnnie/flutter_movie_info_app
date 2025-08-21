@@ -27,7 +27,7 @@ class AppTheme {
     fontWeight: bodyFontWeight,
   );
 
-  static ThemeData DarkTheme = ThemeData(
+  static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Paperlogy',
     colorScheme: const ColorScheme.dark(

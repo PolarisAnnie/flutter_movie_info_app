@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_info_app/domain/entity/movie.dart';
 import 'package:flutter_movie_info_app/presentation/pages/detail/detail_page.dart';
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
 class MovieList extends StatelessWidget {
   final String label;
   final bool orderByPopular;
+  final List<Movie> movies;
   const MovieList({
     required this.label,
     required this.orderByPopular,
+    required this.movies,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (movies.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: AppTheme.titleStyle),
+          SizedBox(height: 10),
+          Text('영화 정보가 없습니다', style: TextStyle(color: Colors.grey)),
+        ],
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -24,6 +38,8 @@ class MovieList extends StatelessWidget {
             itemCount: 20,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
+              final movie = movies[index];
+
               return Row(
                 children: [
                   Padding(
@@ -32,12 +48,13 @@ class MovieList extends StatelessWidget {
                         : const EdgeInsets.only(right: 12),
                     child: GestureDetector(
                       onTap: () {
-                        //TODO: 영화 정보 가지고 넘기기
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                DetailPage(heroTag: 'movie-$label-$index'),
+                            builder: (context) => DetailPage(
+                              movieId: movie.id,
+                              heroTag: 'movie-$label-$index',
+                            ),
                           ),
                         );
                       },
@@ -49,9 +66,10 @@ class MovieList extends StatelessWidget {
                                   tag: 'movie-$label-$index',
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    //TODO: TMDB API에서 이미지 정보 넣기
                                     child: Image.network(
-                                      'https://picsum.photos/500/700', // 고정 크기
+                                      movie.posterPath.isNotEmpty
+                                          ? 'https://image.tmdb.org/t/p/w500${movie.posterPath}'
+                                          : 'https://picsum.photos/500/700',
                                       width: 120,
                                       height: 180,
                                       fit: BoxFit.cover,
@@ -72,9 +90,10 @@ class MovieList extends StatelessWidget {
                               tag: 'movie-$label-$index',
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                //TODO: TMDB API에서 이미지 정보 넣기
                                 child: Image.network(
-                                  'https://picsum.photos/500/700',
+                                  movie.posterPath.isNotEmpty
+                                      ? 'https://image.tmdb.org/t/p/w500${movie.posterPath}'
+                                      : 'https://picsum.photos/500/700',
                                   fit: BoxFit.cover,
                                 ),
                               ),

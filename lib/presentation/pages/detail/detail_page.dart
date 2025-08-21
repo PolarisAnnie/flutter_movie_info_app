@@ -7,9 +7,10 @@ import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/product
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required this.heroTag});
+  const DetailPage({super.key, required this.heroTag, required this.movieId});
 
   final String heroTag;
+  final int movieId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

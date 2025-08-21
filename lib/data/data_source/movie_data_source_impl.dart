@@ -1,3 +1,4 @@
+// lib/data/data_source/movie_data_source_impl.dart
 import 'dart:convert';
 import 'package:flutter_movie_info_app/data/data_source/movie_data_source.dart';
 import 'package:flutter_movie_info_app/data/dto/movie_detail_dto.dart';
@@ -6,21 +7,22 @@ import 'package:http/http.dart' as http;
 
 class MovieDataSourceImpl implements MovieDataSource {
   final http.Client httpClient;
-  final String _apiKey = const String.fromEnvironment('TMDB_ACCESS_TOKEN');
+  final String _accessToken;
   final String _baseUrl = 'https://api.themoviedb.org/3';
 
-  // 생성자에서 httpClient 주입 (테스트용 Mock 지원)
-  MovieDataSourceImpl({http.Client? httpClient})
-    : httpClient = httpClient ?? http.Client();
+  // 생성자에서 httpClient와 accessToken 주입
+  MovieDataSourceImpl({http.Client? httpClient, required String accessToken})
+    : httpClient = httpClient ?? http.Client(),
+      _accessToken = accessToken {}
 
   @override
   Future<MovieResponseDto?> fetchNowPlayingMovies() async {
     try {
-      final url = '$_baseUrl/movie/now_playing?language=ko-KR'; // API 키 제거
+      final url = '$_baseUrl/movie/now_playing?language=ko-KR';
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_apiKey', // Bearer Token 방식
+          'Authorization': 'Bearer $_accessToken', // _apiKey 대신 _accessToken 사용
           'Content-Type': 'application/json',
         },
       );
@@ -43,7 +45,7 @@ class MovieDataSourceImpl implements MovieDataSource {
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_apiKey',
+          'Authorization': 'Bearer $_accessToken',
           'Content-Type': 'application/json',
         },
       );
@@ -65,7 +67,7 @@ class MovieDataSourceImpl implements MovieDataSource {
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_apiKey',
+          'Authorization': 'Bearer $_accessToken',
           'Content-Type': 'application/json',
         },
       );
@@ -87,7 +89,7 @@ class MovieDataSourceImpl implements MovieDataSource {
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_apiKey',
+          'Authorization': 'Bearer $_accessToken',
           'Content-Type': 'application/json',
         },
       );
@@ -109,7 +111,7 @@ class MovieDataSourceImpl implements MovieDataSource {
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_apiKey',
+          'Authorization': 'Bearer $_accessToken',
           'Content-Type': 'application/json',
         },
       );
