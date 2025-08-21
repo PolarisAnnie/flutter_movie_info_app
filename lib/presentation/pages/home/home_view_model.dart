@@ -1,5 +1,3 @@
-// home_view_model.dart
-
 import 'package:flutter_movie_info_app/presentation/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_movie_info_app/domain/entity/movie.dart';
@@ -90,6 +88,34 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  Future<void> refreshAllMovies() async {
+    // 상태 초기화 (페이지와 추가 데이터들 리셋)
+    state = state.copyWith(
+      isLoading: true,
+      errorMessage: null,
+      popularMoviesPage: 1, // 페이지 리셋
+      hasMorePopularMovies: true, // 더보기 가능 상태로 리셋
+      isLoadingMorePopular: false, // 추가 로딩 상태 리셋
+    );
+
+    try {
+      // 모든 영화 카테고리 새로 로딩
+      await Future.wait([
+        getNowPlayingMovies(),
+        getPopularMovies(), // 첫 페이지만 다시 로딩
+        getTopRatedMovies(),
+        getUpcomingMovies(),
+      ]);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: '새로고침 중 오류가 발생했습니다: $e',
+      );
+    } finally {
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
   Future<void> getNowPlayingMovies() async {
     try {
       final movies = await _getNowPlayingMoviesUseCase.execute();
@@ -107,7 +133,10 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     try {
       final movies = await _getPopularMoviesUseCase.execute();
       if (movies != null) {
-        state = state.copyWith(popularMovies: movies);
+        state = state.copyWith(
+          popularMovies: movies, // 기존 영화들 교체
+          popularMoviesPage: 1, // 페이지 리셋
+        );
       } else {
         state = state.copyWith(errorMessage: '인기 영화를 불러올 수 없습니다');
       }

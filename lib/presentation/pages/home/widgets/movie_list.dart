@@ -45,7 +45,7 @@ class MovieList extends StatelessWidget {
                   onLoadMore != null &&
                   !isLoadingMore &&
                   scrollInfo.metrics.pixels >=
-                      scrollInfo.metrics.maxScrollExtent - 200) {
+                      scrollInfo.metrics.maxScrollExtent - 100) {
                 onLoadMore!();
               }
               return false;
