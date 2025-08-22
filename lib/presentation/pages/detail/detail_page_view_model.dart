@@ -68,11 +68,6 @@ class DetailPageViewModel extends Notifier<DetailPageState> {
     state = state.copyWith(errorMessage: null);
   }
 
-  // 데이터 새로고침
-  Future<void> refresh(int movieId) async {
-    await getMovieDetail(movieId);
-  }
-
   // ViewModel 초기화 (새로운 영화로 전환 시)
   void reset() {
     state = DetailPageState();

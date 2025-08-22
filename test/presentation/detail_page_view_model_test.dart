@@ -220,10 +220,6 @@ void main() {
         () => mockGetMovieDetailUseCase.execute(movieId),
       ).thenAnswer((_) async => mockMovieDetail);
 
-      // When
-      final viewModel = container.read(detailPageViewModelProvider.notifier);
-      await viewModel.refresh(movieId);
-
       // Then
       final state = container.read(detailPageViewModelProvider);
       expect(state.movieDetail?.title, equals('파이트 클럽'));

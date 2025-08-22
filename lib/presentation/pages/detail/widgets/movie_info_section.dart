@@ -27,9 +27,9 @@ class MovieInfoSection extends StatelessWidget {
             Text(releaseDate, style: AppTheme.bodyStyle),
           ],
         ),
+        // 태그라인이 있을 경우에만 해당 섹션 보여주기
         if (tagline.isNotEmpty) ...[
           SizedBox(height: 12),
-
           // 태그라인
           Text(tagline, style: AppTheme.bodyStyle, maxLines: 3),
         ],

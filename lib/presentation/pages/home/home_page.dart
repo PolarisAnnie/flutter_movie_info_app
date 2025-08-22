@@ -57,6 +57,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                         builder: (context) => DetailPage(
                           movieId: mainMovie.id,
                           heroTag: 'movie-main-poster',
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500${mainMovie.posterPath}',
                         ),
                       ),
                     );

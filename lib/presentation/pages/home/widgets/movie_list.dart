@@ -85,6 +85,8 @@ class MovieList extends StatelessWidget {
                               builder: (context) => DetailPage(
                                 movieId: movie.id,
                                 heroTag: 'movie-$label-$index',
+                                imageUrl:
+                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                               ),
                             ),
                           );

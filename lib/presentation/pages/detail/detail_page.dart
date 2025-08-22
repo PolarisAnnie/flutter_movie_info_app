@@ -9,10 +9,16 @@ import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/product
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
 class DetailPage extends ConsumerStatefulWidget {
-  const DetailPage({super.key, required this.heroTag, required this.movieId});
+  const DetailPage({
+    super.key,
+    required this.heroTag,
+    required this.movieId,
+    required this.imageUrl,
+  });
 
   final String heroTag;
   final int movieId;
+  final String imageUrl;
 
   @override
   ConsumerState<DetailPage> createState() => _DetailPageState();
@@ -64,8 +70,6 @@ class _DetailPageState extends ConsumerState<DetailPage> {
       return Scaffold(body: Center(child: Text('영화 정보가 없습니다')));
     }
 
-    print('🏢 제작사 로고들: ${movieDetail.productionCompanyLogos}');
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -80,11 +84,10 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                   child: Image.network(
                     movieDetail.posterPath != null &&
                             movieDetail.posterPath!.isNotEmpty
-                        ? 'https://image.tmdb.org/t/p/w500${movieDetail.posterPath}'
+                        ? widget.imageUrl
                         : 'https://picsum.photos/500/700',
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
-                      print('🔴 이미지 로딩 실패: ${movieDetail.posterPath}');
                       return Image.network(
                         'https://picsum.photos/500/700',
                         fit: BoxFit.cover,
