@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_info_app/presentation/pages/detail/detail_page_view_model.dart';
+import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/review_section.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/box_office_section.dart';
 import 'package:flutter_movie_info_app/presentation/pages/detail/widgets/divider_line.dart';
@@ -130,6 +131,13 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                     const SizedBox(height: 8),
                     const DividerLine(),
                   ],
+                  const SizedBox(height: 20),
+                  ReviewSection(
+                    movieTitle: movieDetail.title,
+                    movieYear: movieDetail.releaseDate.year,
+                  ), // 나만의 기능: 리뷰 섹션 추가
+                  const SizedBox(height: 20),
+                  const DividerLine(),
                   const SizedBox(height: 20),
                   BoxOfficeSection(
                     voteAverage: movieDetail.voteAverage,
