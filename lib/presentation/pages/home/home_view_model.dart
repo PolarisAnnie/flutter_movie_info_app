@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_movie_info_app/domain/entity/movie.dart';
 import 'package:flutter_movie_info_app/domain/usecase/movie_usecase.dart';
 
+// 홈 페이지 상태 관리
 class HomePageState {
   final List<Movie> nowPlayingMovies;
   final List<Movie> popularMovies;
@@ -26,6 +27,7 @@ class HomePageState {
     this.hasMorePopularMovies = true,
   });
 
+  // 상태 변경을 위한 copyWith 메서드
   HomePageState copyWith({
     List<Movie>? nowPlayingMovies,
     List<Movie>? popularMovies,
@@ -51,6 +53,7 @@ class HomePageState {
   }
 }
 
+// 홈 페이지 비즈니스 로직 및 상태 관리
 class HomePageViewModel extends StateNotifier<HomePageState> {
   final GetNowPlayingMoviesUseCase _getNowPlayingMoviesUseCase;
   final GetPopularMoviesUseCase _getPopularMoviesUseCase;
@@ -68,6 +71,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
        _getUpcomingMoviesUseCase = getUpcomingMoviesUseCase,
        super(const HomePageState());
 
+  // 모든 영화 데이터 로드
   Future<void> loadAllMovies() async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
@@ -88,21 +92,20 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 모든 영화 데이터 새로고침
   Future<void> refreshAllMovies() async {
-    // 상태 초기화 (페이지와 추가 데이터들 리셋)
     state = state.copyWith(
       isLoading: true,
       errorMessage: null,
       popularMoviesPage: 1, // 페이지 리셋
-      hasMorePopularMovies: true, // 더보기 가능 상태로 리셋
+      hasMorePopularMovies: true, // 더보기 가능 상태 리셋
       isLoadingMorePopular: false, // 추가 로딩 상태 리셋
     );
 
     try {
-      // 모든 영화 카테고리 새로 로딩
       await Future.wait([
         getNowPlayingMovies(),
-        getPopularMovies(), // 첫 페이지만 다시 로딩
+        getPopularMovies(), // 첫 페이지 다시 로드
         getTopRatedMovies(),
         getUpcomingMovies(),
       ]);
@@ -116,6 +119,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 현재 상영 중인 영화 로드
   Future<void> getNowPlayingMovies() async {
     try {
       final movies = await _getNowPlayingMoviesUseCase.execute();
@@ -129,12 +133,13 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 인기 영화 로드
   Future<void> getPopularMovies() async {
     try {
       final movies = await _getPopularMoviesUseCase.execute();
       if (movies != null) {
         state = state.copyWith(
-          popularMovies: movies, // 기존 영화들 교체
+          popularMovies: movies, // 기존 영화 교체
           popularMoviesPage: 1, // 페이지 리셋
         );
       } else {
@@ -145,6 +150,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 평점 높은 영화 로드
   Future<void> getTopRatedMovies() async {
     try {
       final movies = await _getTopRatedMoviesUseCase.execute();
@@ -158,6 +164,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 개봉 예정 영화 로드
   Future<void> getUpcomingMovies() async {
     try {
       final movies = await _getUpcomingMoviesUseCase.execute();
@@ -171,10 +178,12 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
     }
   }
 
+  // 에러 메시지 초기화
   void clearError() {
     state = state.copyWith(errorMessage: null);
   }
 
+  // 인기 영화 추가 로드
   Future<void> loadMorePopularMovies() async {
     print('인기 영화 더 로딩 시작 - 현재 페이지: ${state.popularMoviesPage}');
     if (state.isLoadingMorePopular || !state.hasMorePopularMovies) {
@@ -185,7 +194,7 @@ class HomePageViewModel extends StateNotifier<HomePageState> {
 
     try {
       final nextPage = state.popularMoviesPage + 1;
-      final newMovies = await _getPopularMoviesUseCase.execute(); // 기존 메서드 사용
+      final newMovies = await _getPopularMoviesUseCase.execute();
 
       if (newMovies != null && newMovies.isNotEmpty) {
         final updatedMovies = [...state.popularMovies, ...newMovies];

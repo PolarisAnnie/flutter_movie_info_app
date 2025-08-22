@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 섹션을 나누는 선 위젯
 class DividerLine extends StatelessWidget {
   const DividerLine({super.key});
 

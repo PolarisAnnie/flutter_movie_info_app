@@ -4,16 +4,18 @@ import 'package:flutter_movie_info_app/data/dto/movie_detail_dto.dart';
 import 'package:flutter_movie_info_app/data/dto/movie_response_dto.dart';
 import 'package:http/http.dart' as http;
 
+// API에서 영화 데이터를 가져오는 클래스
 class MovieDataSourceImpl implements MovieDataSource {
   final http.Client httpClient;
   final String _accessToken;
   final String _baseUrl = 'https://api.themoviedb.org/3';
 
-  // 생성자에서 httpClient와 accessToken 주입
+  // 생성자로 HTTP 클라이언트와 액세스 토큰 주입
   MovieDataSourceImpl({http.Client? httpClient, required String accessToken})
     : httpClient = httpClient ?? http.Client(),
-      _accessToken = accessToken {}
+      _accessToken = accessToken;
 
+  // 지금 상영 중인 영화 목록 가져오기
   @override
   Future<MovieResponseDto?> fetchNowPlayingMovies() async {
     try {
@@ -21,7 +23,7 @@ class MovieDataSourceImpl implements MovieDataSource {
       final response = await httpClient.get(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer $_accessToken', // _apiKey 대신 _accessToken 사용
+          'Authorization': 'Bearer $_accessToken', // 인증 헤더
           'Content-Type': 'application/json',
         },
       );
@@ -37,6 +39,7 @@ class MovieDataSourceImpl implements MovieDataSource {
     }
   }
 
+  // 인기 영화 목록 가져오기
   @override
   Future<MovieResponseDto?> fetchPopularMovies() async {
     try {
@@ -59,6 +62,7 @@ class MovieDataSourceImpl implements MovieDataSource {
     }
   }
 
+  // 평점 높은 영화 목록 가져오기
   @override
   Future<MovieResponseDto?> fetchTopRatedMovies() async {
     try {
@@ -81,6 +85,7 @@ class MovieDataSourceImpl implements MovieDataSource {
     }
   }
 
+  // 개봉 예정 영화 목록 가져오기
   @override
   Future<MovieResponseDto?> fetchUpcomingMovies() async {
     try {
@@ -103,6 +108,7 @@ class MovieDataSourceImpl implements MovieDataSource {
     }
   }
 
+  // 영화 상세 정보 가져오기
   @override
   Future<MovieDetailDto?> fetchMovieDetail(int id) async {
     try {

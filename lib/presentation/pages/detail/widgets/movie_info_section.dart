@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_info_app/theme/theme.dart';
 
+// 영화 기본 정보를 표시하는 위젯
 class MovieInfoSection extends StatelessWidget {
   final String title;
   final String releaseDate;
