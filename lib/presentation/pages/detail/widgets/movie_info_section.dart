@@ -27,10 +27,13 @@ class MovieInfoSection extends StatelessWidget {
             Text(releaseDate, style: AppTheme.bodyStyle),
           ],
         ),
-        SizedBox(height: 12),
+        if (tagline.isNotEmpty) ...[
+          SizedBox(height: 12),
 
-        // 태그라인
-        Text(tagline, style: AppTheme.bodyStyle, maxLines: 3),
+          // 태그라인
+          Text(tagline, style: AppTheme.bodyStyle, maxLines: 3),
+        ],
+
         SizedBox(height: 4),
 
         // 러닝타임

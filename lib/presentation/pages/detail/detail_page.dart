@@ -114,9 +114,12 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                   SizedBox(height: 8),
                   DividerLine(),
                   SizedBox(height: 8),
-                  Text(movieDetail.overview, style: AppTheme.bodyStyle),
-                  SizedBox(height: 8),
-                  DividerLine(),
+                  // 오버뷰가 있을 경우에만 해당 섹션 보여주기
+                  if (movieDetail.overview.isNotEmpty) ...[
+                    Text(movieDetail.overview, style: AppTheme.bodyStyle),
+                    SizedBox(height: 8),
+                    DividerLine(),
+                  ],
                   SizedBox(height: 20),
                   BoxOfficeSection(
                     voteAverage: movieDetail.voteAverage,
