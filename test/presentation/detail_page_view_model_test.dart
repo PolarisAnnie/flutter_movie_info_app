@@ -60,6 +60,7 @@ void main() {
         title: '인사이드 아웃 2',
         voteAverage: 7.6,
         voteCount: 5678,
+        productionCompanyNames: ['Disney'],
       );
 
       when(
@@ -104,6 +105,7 @@ void main() {
         title: '인사이드 아웃 2',
         voteAverage: 7.6,
         voteCount: 5678,
+        productionCompanyNames: ['Disney'],
       );
 
       when(() => mockGetMovieDetailUseCase.execute(movieId)).thenAnswer((
@@ -211,6 +213,7 @@ void main() {
         title: '파이트 클럽',
         voteAverage: 8.4,
         voteCount: 26280,
+        productionCompanyNames: ['Disney'],
       );
 
       when(
@@ -250,6 +253,7 @@ void main() {
         title: '다크 나이트',
         voteAverage: 9.0,
         voteCount: 31000,
+        productionCompanyNames: ['Disney'],
       );
 
       when(
@@ -292,6 +296,7 @@ void main() {
         title: '쇼생크 탈출',
         voteAverage: 9.3,
         voteCount: 26000,
+        productionCompanyNames: ['Disney'],
       );
 
       when(
@@ -322,6 +327,7 @@ void main() {
         title: '대부',
         voteAverage: 9.2,
         voteCount: 19000,
+        productionCompanyNames: ['Disney'],
       );
 
       when(() => mockGetMovieDetailUseCase.execute(secondMovieId)).thenAnswer((

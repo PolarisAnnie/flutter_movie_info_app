@@ -133,6 +133,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                               'https://image.tmdb.org/t/p/w154$logoPath',
                         )
                         .toList(),
+                    productionCompanyNames: movieDetail.productionCompanyNames,
                   ),
                 ],
               ),

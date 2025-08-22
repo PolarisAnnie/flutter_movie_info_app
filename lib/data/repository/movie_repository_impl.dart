@@ -19,6 +19,9 @@ class MovieRepositoryImpl implements MovieRepository {
       productionCompanyLogos: result.productionCompanies
           .map((company) => company.logoPath ?? '')
           .toList(),
+      productionCompanyNames: result.productionCompanies
+          .map((company) => company.name)
+          .toList(),
       overview: result.overview,
       popularity: result.popularity,
       releaseDate: result.releaseDate!,

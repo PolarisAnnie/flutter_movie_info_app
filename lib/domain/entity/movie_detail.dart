@@ -11,6 +11,9 @@ class MovieDetail {
   /// 제작 회사 로고들의 리스트 (각 로고는 이미지 경로 또는 URL일 수 있음)
   final List<String> productionCompanyLogos;
 
+  /// 제작 회사 이름 리스트
+  final List<String> productionCompanyNames;
+
   /// 영화에 대한 간략한 설명 (줄거리)
   final String overview;
 
@@ -38,6 +41,7 @@ class MovieDetail {
   /// 영화에 대한 총 투표 수
   final int voteCount;
 
+  /// 포스터 경로
   final String? posterPath;
 
   MovieDetail({
@@ -45,6 +49,7 @@ class MovieDetail {
     required this.genres,
     required this.id,
     required this.productionCompanyLogos,
+    required this.productionCompanyNames,
     required this.overview,
     required this.popularity,
     required this.releaseDate,

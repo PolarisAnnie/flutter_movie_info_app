@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class ProductionGallery extends StatelessWidget {
   final List<String> productionImageUrls;
+  final List<String> productionCompanyNames;
 
-  const ProductionGallery({super.key, required this.productionImageUrls});
+  const ProductionGallery({
+    super.key,
+    required this.productionImageUrls,
+    required this.productionCompanyNames,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,10 @@ class ProductionGallery extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: ProductionImage(imageUrl: productionImageUrls[index]),
+            child: ProductionImage(
+              imageUrl: productionImageUrls[index],
+              companyName: productionCompanyNames[index],
+            ),
           );
         },
       ),
@@ -25,8 +33,13 @@ class ProductionGallery extends StatelessWidget {
 
 class ProductionImage extends StatelessWidget {
   final String imageUrl;
+  final String companyName;
 
-  const ProductionImage({super.key, required this.imageUrl});
+  const ProductionImage({
+    super.key,
+    required this.imageUrl,
+    required this.companyName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +69,21 @@ class ProductionImage extends StatelessWidget {
           },
           errorBuilder: (context, error, stackTrace) {
             return Container(
+              alignment: Alignment.center,
               width: 120,
               height: 80,
               color: Colors.grey[300],
-              child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
+              child: Text(
+                companyName,
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
             );
           },
         ),

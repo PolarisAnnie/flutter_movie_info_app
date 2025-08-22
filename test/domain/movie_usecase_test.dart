@@ -145,6 +145,7 @@ void main() {
         title: '데드풀과 울버린',
         voteAverage: 7.7,
         voteCount: 5000,
+        productionCompanyNames: ['Disney'],
       );
 
       when(
