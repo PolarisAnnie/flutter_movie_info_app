@@ -14,13 +14,14 @@ TMDB API를 활용한 영화 정보 앱으로, 인기/최신/높은 평점 영�
 - **영화 포스터** - 고화질 포스터 이미지와 Hero 애니메이션
 - **기본 정보** - 제목, 개봉일, 러닝타임, 장르
 - **줄거리** - 영화 개요 및 태그라인
+- **AI 리뷰 요약** -영화 제목 기반 온라인 리뷰 종합 분석
 - **박스오피스 정보** - 평점, 투표수, 인기도, 제작비, 수익
 - **제작사 정보** - 제작사 로고 갤러리
 
 ### 3. 사용자 경험
 - **다크 테마** - 영화 앱에 적합한 어두운 UI
 - **부드러운 애니메이션** - Hero 애니메이션을 통한 자연스러운 화면 전환
-- **에러 처리** - 네트워크 오류 시 대체 이미지 및 재시도 기능
+- **에러 처리** - 네트워크 오류 시 대체 이미지 기능
 
 ## 아키텍처
 
@@ -71,6 +72,7 @@ Presentation → Domain ← Data
 ### **네트워킹 & 데이터**
 - **http** ^1.5.0 - HTTP 클라이언트
 - **flutter_dotenv** ^5.0.2 - 환경 변수 관리
+- **google_generative_ai ^0.4.3** - Gemini AI API 연동
 
 ### **UI & 디자인**
 - **Custom Theme** - 일관성 있는 디자인 시스템
@@ -78,6 +80,7 @@ Presentation → Domain ← Data
 
 ### **외부 API**
 - **TMDB API** - 영화 정보 및 이미지 제공
+- **Gemini AI API** - 영화 리뷰 분석
 
 ## 프로젝트 구조
 
@@ -106,7 +109,8 @@ lib/
 ├── data/                  # 데이터 레이어 (외부 데이터 소스)
 │   ├── data_source/         # 데이터 소스 (API, DB 등)
 │   │   ├── movie_data_source.dart
-│   │   └── movie_data_source_impl.dart
+│   │   ├── movie_data_source_impl.dart
+│   │   └── gemini_data_source.dart
 │   ├── dto/                 # 데이터 전송 객체 (외부 API 응답)
 │   │   ├── movie_dto.dart
 │   │   └── movie_detail_dto.dart
@@ -120,6 +124,9 @@ lib/
 ```
 
 ## 주요 기능 상세
+### **AI 리뷰 분석**
+- Gemini AI 연동 - 영화 제목 기반 온라인 리뷰 종합 분석
+- 관점별 분석 - 스토리, 연출/영상, 연기/캐릭터 3가지 관점으로 분류
 
 ### **데이터 플로우**
 1. **API 호출** - TMDB API에서 영화 데이터 요청
