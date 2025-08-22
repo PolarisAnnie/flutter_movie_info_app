@@ -22,24 +22,24 @@ TMDB API를 활용한 영화 정보 앱으로, 인기/최신/높은 평점 영�
 - **부드러운 애니메이션** - Hero 애니메이션을 통한 자연스러운 화면 전환
 - **에러 처리** - 네트워크 오류 시 대체 이미지 및 재시도 기능
 
-## 🏗️ 아키텍처
+## 아키텍처
 
 ### **Clean Architecture**
 
 클린 아키텍처 원칙을 따라 의존성 방향이 내부로 향하도록 설계된 3층 구조입니다.
 
 ```
-📱 Presentation Layer (가장 바깥층)
+Presentation Layer (가장 바깥층)
     ├── Pages (HomePage, DetailPage)
     ├── Widgets (MovieList, MovieInfo 등)
     └── ViewModels (Riverpod StateNotifier)
     
-🎯 Domain Layer (핵심 비즈니스 로직)
+Domain Layer (핵심 비즈니스 로직)
     ├── Entities (Movie, MovieDetail)
     ├── Repositories (인터페이스)
     └── Use Cases (비즈니스 규칙)
     
-💾 Data Layer (가장 안쪽층)
+Data Layer (가장 안쪽층)
     ├── DataSources (API 통신)
     ├── Repositories Impl (구현체)
     └── DTOs (데이터 변환)
@@ -59,7 +59,7 @@ Presentation → Domain ← Data
 - **StateNotifier** - 복잡한 상태 로직 처리
 - **AsyncValue** - 비동기 데이터 상태 (로딩/성공/에러) 관리
 
-## 🛠️ 기술 스택
+## 기술 스택
 
 ### **Frontend**
 - **Flutter** 3.19+ - 크로스 플랫폼 UI 프레임워크
@@ -79,11 +79,11 @@ Presentation → Domain ← Data
 ### **외부 API**
 - **TMDB API** - 영화 정보 및 이미지 제공
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 lib/
-├── 📱 presentation/           # UI 레이어
+├── presentation/           # UI 레이어
 │   ├── pages/                # 화면별 페이지
 │   │   ├── home/            # 홈 화면
 │   │   │   ├── home_page.dart
@@ -95,7 +95,7 @@ lib/
 │   │       └── widgets/     # 상세 화면 위젯들
 │   └── widgets/             # 공통 위젯
 │
-├── 🎯 domain/                # 도메인 레이어 (핵심 비즈니스 로직)
+├── domain/                # 도메인 레이어 (핵심 비즈니스 로직)
 │   ├── entity/              # 엔티티 (순수 비즈니스 객체)
 │   │   ├── movie.dart
 │   │   └── movie_detail.dart
@@ -103,7 +103,7 @@ lib/
 │   │   └── movie_repository.dart
 │   └── use_case/            # 비즈니스 규칙 및 유즈케이스
 │
-├── 💾 data/                  # 데이터 레이어 (외부 데이터 소스)
+├── data/                  # 데이터 레이어 (외부 데이터 소스)
 │   ├── data_source/         # 데이터 소스 (API, DB 등)
 │   │   ├── movie_data_source.dart
 │   │   └── movie_data_source_impl.dart
@@ -113,13 +113,13 @@ lib/
 │   └── repository/          # 레포지토리 구현체
 │       └── movie_repository_impl.dart
 │
-├── 🎨 theme/                 # 디자인 시스템
+├── theme/                 # 디자인 시스템
 │   └── theme.dart
 │
 └── main.dart                # 앱 진입점
 ```
 
-## 🔧 주요 기능 상세
+## 주요 기능 상세
 
 ### **데이터 플로우**
 1. **API 호출** - TMDB API에서 영화 데이터 요청
@@ -133,7 +133,7 @@ lib/
 - **상태 최적화** - 불필요한 리빌드 방지
 
 ### **알려진 이슈**
-- 🔄 앱 첫 실행 시 Hero 애니메이션이 첫 번째 클릭에서 작동하지 않는 경우가 있음
+- 앱 첫 실행 시 Hero 애니메이션이 첫 번째 클릭에서 작동하지 않는 경우가 있음
   - 두 번째 클릭부터는 정상 작동
   - Flutter Hero 시스템의 초기화 타이밍 이슈로 추정
 
